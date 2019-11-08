@@ -178,4 +178,17 @@
     <string name="default_backgroundColorSelected_summary">已选格子的背景色。</string>
     <string name="default_backgroundColorSelected">已选格子的背景</string>
     <string name="default_backgroundColorTouched_summary">当您按下任何单元格时出现的选择交叉的颜色。</string>
+
+    <!-- Strings added/changed in 2.6.0 -->
+    <string name="solve_puzzle">解决谜题</string>
+    <string name="solve_puzzle_confirm">你确定要直接看结果？</string>
+    <string name="used_solver">你已经解过该题！</string>
+    <string name="puzzle_not_solved">此题无解！</string>
+
+    <string name="solver_hint">提示</string>
+    <string name="hint_confirm">本操作将会往选中的单元格内填充正确答案，是否继续？</string>
+    <string name="cannot_give_hint">无法获取该单元格的提示。</string>
+
+    <string name="check_solvabitily">检查是否有解</string>
+    <string name="puzzle_solvable">此题有解。</string>
 </resources>

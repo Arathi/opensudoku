@@ -221,8 +221,9 @@ public class IMSingleNumber extends InputMethod {
             }
 
             Map<Integer, Integer> valuesUseCount = null;
-            if (mHighlightCompletedValues || mShowNumberTotals)
+            if (mHighlightCompletedValues || mShowNumberTotals) {
                 valuesUseCount = mGame.getCells().getValuesUseCount();
+            }
 
             if (mHighlightCompletedValues) {
                 //int completedTextColor = mContext.getResources().getColor(R.color.im_number_button_completed_text);

@@ -533,6 +533,7 @@ public class SudokuBoardView extends View {
                                 canvas.drawText(Integer.toString(number), cellLeft + c * noteWidth + 2, cellTop + mNoteTop - noteAscent + r * noteWidth - 1, mCellNotePaint);
                             }
                         }
+                        // TODO 输出红线
                     }
                 }
             }

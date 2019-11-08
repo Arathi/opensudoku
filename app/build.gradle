@@ -5,10 +5,10 @@ android {
     buildToolsVersion '28.0.3'
 
     defaultConfig {
-        applicationId "org.moire.opensudoku"
+        applicationId "com.undsf.opensudoku"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 20191025
+        versionCode 20191108
         versionName "2.6.4"
     }
 
@@ -25,6 +25,7 @@ android {
 
     lintOptions {
         checkReleaseBuilds false
+        // abortOnError false
     }
 
     compileOptions {
