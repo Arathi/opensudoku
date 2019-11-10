@@ -407,7 +407,7 @@ public class SudokuPlayActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+        // super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQUEST_SETTINGS:
                 restartActivity();

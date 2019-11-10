@@ -8,8 +8,8 @@ android {
         applicationId "com.undsf.opensudoku"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 20191108
-        versionName "2.6.4"
+        versionCode 20191110
+        versionName "2.6.4.1"
     }
 
     buildTypes {

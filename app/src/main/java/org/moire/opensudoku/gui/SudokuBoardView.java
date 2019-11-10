@@ -76,6 +76,7 @@ public class SudokuBoardView extends View {
     private Paint mCellValuePaint;
     private Paint mCellValueReadonlyPaint;
     private Paint mCellNotePaint;
+    private Paint mRedLinePaint;
     private int mNumberLeft;
     private int mNumberTop;
     private float mNoteTop;
@@ -114,12 +115,15 @@ public class SudokuBoardView extends View {
         mBackgroundColorTouched = new Paint();
         mBackgroundColorSelected = new Paint();
         mBackgroundColorHighlighted = new Paint();
+        mRedLinePaint = new Paint();
 
         mCellValuePaint.setAntiAlias(true);
         mCellValueReadonlyPaint.setAntiAlias(true);
         mCellValueInvalidPaint.setAntiAlias(true);
         mCellNotePaint.setAntiAlias(true);
         mCellValueInvalidPaint.setColor(Color.RED);
+        mRedLinePaint.setColor(Color.RED);
+        mRedLinePaint.setStrokeWidth(1);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.SudokuBoardView/*, defStyle, 0*/);
 
@@ -336,12 +340,6 @@ public class SudokuBoardView extends View {
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
 
-
-//        Log.d(TAG, "widthMode=" + getMeasureSpecModeString(widthMode));
-//        Log.d(TAG, "widthSize=" + widthSize);
-//        Log.d(TAG, "heightMode=" + getMeasureSpecModeString(heightMode));
-//        Log.d(TAG, "heightSize=" + heightSize);
-
         int width, height;
         if (widthMode == MeasureSpec.EXACTLY) {
             width = widthSize;
@@ -533,7 +531,70 @@ public class SudokuBoardView extends View {
                                 canvas.drawText(Integer.toString(number), cellLeft + c * noteWidth + 2, cellTop + mNoteTop - noteAscent + r * noteWidth - 1, mCellNotePaint);
                             }
                         }
+
                         // TODO 输出红线
+                        if (selectedValue > 0 && selectedValue < 10) {
+                            boolean xExists = false;
+                            boolean yExists = false;
+                            boolean bExists = false;
+
+                            // 横线，col
+                            for (int x = 0; x < 9; x++) {
+                                Cell c = mCells.getCell(row, x);
+                                if (c.getValue() == selectedValue) {
+                                    xExists = true;
+                                    break;
+                                }
+                            }
+
+                            // 竖线，row
+                            for (int y = 0; y < 9; y++) {
+                                Cell c = mCells.getCell(y, col);
+                                if (c.getValue() == selectedValue) {
+                                    yExists = true;
+                                    break;
+                                }
+                            }
+
+                            // TODO 叉号
+                            int sx = col / 3;
+                            int sy = row / 3;
+                            for (int x = sx * 3; x < sx * 3 + 3; x++) {
+                                for (int y = sy * 3; y < sy * 3 + 3; y++) {
+                                    Cell c = mCells.getCell(y, x);
+                                    if (c.getValue() == selectedValue) {
+                                        bExists = true;
+                                        break;
+                                    }
+                                }
+                                if (bExists) {
+                                    xExists = false;
+                                    yExists = false;
+                                    break;
+                                }
+                            }
+
+                            if (xExists) {
+                                sx = Math.round(col * mCellWidth);
+                                sy = (int) Math.round((row + 0.5) * mCellHeight);
+                                canvas.drawLine(sx, sy, sx + mCellWidth, sy, mRedLinePaint);
+                            }
+                            if (yExists) {
+                                sx = (int) Math.round((col + 0.5) * mCellWidth);
+                                sy = Math.round(row * mCellHeight);
+                                canvas.drawLine(sx, sy, sx, sy + mCellHeight, mRedLinePaint);
+                            }
+                            if (bExists) {
+                                canvas.drawLine(cellLeft, cellTop,
+                                        cellLeft + mCellWidth - 2 * paddingLeft,
+                                        cellTop + mCellHeight - 2 * paddingTop,
+                                        mRedLinePaint);
+                                canvas.drawLine(cellLeft, cellTop + mCellHeight - 2 * paddingTop,
+                                        cellLeft + mCellWidth - 2 * paddingLeft,
+                                        cellTop,
+                                        mRedLinePaint);
+                            }
+                        }
                     }
                 }
             }

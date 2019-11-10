@@ -2,4 +2,8 @@
 <lint>
     <!-- list of issues to configure -->
     <issue id="AppLinkUrlError" severity="ignore"/>
+    <issue id="MissingSuperCall">
+        <ignore path="src/main/java/org/moire/opensudoku/gui/SudokuPlayActivity.java" />
+    </issue>
+    <issue id="MissingTranslation" severity="ignore" />
 </lint>
